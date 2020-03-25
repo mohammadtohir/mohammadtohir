@@ -1,0 +1,332 @@
+body {
+  margin: 0px;
+  padding: 0;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;      
+}
+
+.kepala{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-height: 8vh;
+    background-color: #ff9000;
+    width: 100%;
+    height: 70px;
+    z-index: 1;
+}
+
+.daftar-menu {
+    display: flex;
+    justify-content: right;
+    list-style: none;
+    margin-top: 8px;
+    width: 300px;
+    margin-right: 250px;
+    letter-spacing: 2px; 
+}
+
+
+
+.gambar-logo {
+    flex: 1 1 auto;
+    margin-top: 13px;
+    margin-left:100px;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 35px;
+    font-family:'arkhip';
+    width: 100px;
+
+}
+
+ a {
+    margin-top: 20px;
+    margin: 15px;
+    color: #107718;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+
+
+a:hover{
+    color: white;
+    text-decoration: none;  
+}
+
+
+.menu-garis div{
+	width: 35px;
+	height: 5px;
+	margin: 5px;
+    margin-right: 50px;
+	background-color: black;
+    
+}
+
+.menu-garis{
+    display: none;
+    cursor: pointer;
+}
+
+.tombol{
+    position: relative;
+    background-image: url(../img/nature-3616194_1920.jpg);
+    width: 100%;
+    height:100vh;
+    background-repeat: no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: 0 -250px;
+
+}
+
+.tombol h1{
+    font-family:'arkhip';
+    display: flex;
+    color: white;
+    margin-top:0px;
+    position: absolute;
+    margin-top: 400px;
+    margin-left: 468px;
+    font-size: 80px;
+    
+    
+}
+.tombol p{
+    font-family:'arkhip';
+    display: flex;
+    color: white;
+    margin-top:0px;
+    position: absolute;
+    margin-top: 50px;
+    margin-left: 430px;
+    
+}
+
+.tombol::before{
+  
+    transform-origin: center center 0;
+    transform: translateZ(-1px) scale(2);
+    z-index: -1;
+    min-height: 100vh;
+} 
+
+.tampil, .about-area, .edit {
+    position: top;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    height: 755px;
+    font-family: sans-serif;
+    
+}
+.tombol{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    height: 700px;
+    font-family: sans-serif;
+}
+
+.pencetan
+
+
+.tampil p{
+    height: 760px;
+}
+
+
+
+.text-part {
+    width: 65%;
+    height: 80%;
+    overflow: hidden;
+    margin-top: 60px;
+}
+
+.garis-login{
+    width: 300px;
+    height: 5px;
+    margin-right: 50px;
+    background-color: #7bc1b6;
+    margin-left: 42vh;
+}
+
+.garis-forgot{
+    width: 355px;
+    height: 5px;
+    margin-right: 50px;
+    background-color: #d7d19d;
+    margin-left: 40vh;
+}
+
+.garis-about{
+    width: 300px;
+    height: 5px;
+    background-color: #7bc1b6;
+    margin-left: 46vh;
+}
+
+.garis-contact{
+    width: 300px;
+    height: 5px;
+    background-color: #d7d19d;
+    margin-left: 46vh;
+}
+
+.login-area button:hover, .tampil button:hover{
+    color: white;
+}
+
+
+h2{
+    font-size: 40px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-top: 10px;
+
+}
+
+p{
+    font-size: 24px;
+    line-height: 40px;
+    text-align: justify;
+    margin-top: 10px;
+
+}
+
+
+.edit h3{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.edit p{
+    font-size: 20px;
+    text-align: center;
+
+}
+
+.edit img{
+    width: 40px;
+}
+
+
+.tombol, .about-area{
+    background: #FFD6A0;
+    
+}
+
+.tampil, .edit{
+    background: #FFBE6A;
+    
+}
+
+
+html{
+    scroll-behavior: smooth;
+}
+
+@media screen and (max-width: 1400px){
+   .daftar-menu {
+    width: 30%;
+}
+    .banner-area{
+        height: 66vh;
+    }
+}
+
+
+@media screen and (max-width: 1024px){
+   .daftar-menu {
+    width: 30%;
+}
+    .banner-area{
+        height: 64vh;
+    }
+}
+
+
+@media screen and (max-width: 768px){
+    body{
+        overflow-x: hidden;
+    }
+   .daftar-menu{
+    position: absolute;
+    right: -250px;
+    width: 150px;
+    height: 100vh;
+    top: 8vh;
+    background-color: #47767c; 
+    display: flex;  
+    flex-direction: column;
+    align-items: center;
+    transform: translate(100%);
+    transition: transform 0.5s ease-in;
+    letter-spacing: 3px;
+    }
+
+    .daftar-menu li{
+        opacity: 1;
+        margin-right: 40px;
+        margin-top: 100px;
+        
+    }
+    .daftar-menu a{
+        margin-top: 10px;
+    }
+
+    .menu-garis{
+        display: block;
+
+    }
+    .menu-garis div:hover{
+        background-color: white;
+        transition: all 0.3s ease;
+    }
+    .banner-area{
+        height: 64vh;
+    }
+}
+
+.menu-aktif{
+    transform: translateX(0%);
+}
+
+@keyframes navLinkFade{
+    from{
+        opacity:0;
+        transform: translateX(50px); 
+    }
+    to{
+        opacity:1;
+        transform: translateX(0px);
+    }
+}
+
+.toggle .garis1{
+    transform: rotate(-45deg) translate(-5px,6px);
+}
+
+.toggle .garis2{
+    opacity: 0;
+}
+
+.toggle .garis3{
+    transform: rotate(45deg) translate(-5px,-6px);
+}

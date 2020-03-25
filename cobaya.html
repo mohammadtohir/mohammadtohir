@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+		<title>Tugas SweetAlert</title>
+	</head>
+	<link rel="stylesheet" href="lib/style.css"/>
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"/>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="#">Tugas</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="#">Daftar Buku <span class="sr-only">(current)</span></a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<br>
+		<div id="pesan"></div>
+		<div class="row">
+			<div class="container">
+				<div class="card bg-light " >
+					<div class="card-header bg-info">Header</div>
+					<div class="card-body">
+						 
+						
+						<div class="btn-group" role="group" >
+							<button type="button" id="btn_reload" class="btn btn-info">
+								<i class="fa fa-home"></i>Reload
+							</button>
+							<button type="button"id="btn_add_new" class="btn btn-success">Add New</button>
+							<button type="button" class="btn btn-primary">Edit</button>
+							<button type="button" class="btn btn-danger">Delete</button>
+						</div>
+
+						<p>&nbsp;</p>
+						<table class="table">
+							<thead class="thead-dark">
+								<tr>
+									<th>Id</th>
+									<th>Judul</th>
+									<th>Pengarang</th>
+									<th>Penerbit</th>
+									<th>Sinopsis</th>
+									<th>Gambar</th>
+									<th>Aksi</th>
+								</tr>
+							</thead>
+							<tbody id='dispayData'></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+			  <div class="modal-body">
+				<input type="hidden" id="tid">
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-label">Judul</label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="tjudul">
+					</div>
+				 </div>
+				 
+				 <div class="form-group row">
+					<label class="col-sm-2 col-form-label">Pengarang</label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="tpengarang">
+					</div>
+				 </div>
+				 
+				 <div class="form-group row">
+					<label class="col-sm-2 col-form-label">Penerbit</label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="tpenerbit">
+					</div>
+				 </div>
+
+				 <div class="form-group row">
+					<label class="col-sm-2 col-form-label">Sinopsis</label>
+					<div class="col-sm-10">
+					  <textarea class="form-control" id="tsinopsis"></textarea>
+					</div>
+				 </div>
+				 <div class="form-group row">
+					<label class="col-sm-2 col-form-label">Gambar</label>
+					<div class="col-sm-10">
+					  <textarea class="form-control" id="tgambar"></textarea>
+					</div>
+				 </div>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" id="btnCancel" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" id="btnProses" class="btn btn-primary">Proses Data</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+
+		<script src="lib/jquery-3.4.1.min.js"></script>
+		<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+		<script src="lib/dist/sweetalert2.all.min.js"></script>
+		<!-- <script src="lib/jquery-loading/dist/jquery.loading.min.js"></script> -->
+		<script>
+			
+			$(document).ready(function(){
+				let modeAction='get';
+
+				$.fn.loadData= function(){
+					$.ajax({
+						url:'api/member/proses.php',
+						dataType:'json',
+						data:{mode:modeAction},
+						type:'POST',
+						beforeSend:function(){	
+
+
+						},
+						success:function(res){	
+
+							let row="";
+							let no=1;
+							
+							
+							for(let i=0; i<res.length; i++){
+								let daftarbuku = JSON.stringify(res[i]);
+								
+								row +="<tr data-daftarbuku='"+daftarbuku+"' ondblclick='$(this).lihatDetail()' >";
+								row +="<td>"+no+"</td>";
+								row +="<td>"+res[i].judul+"</td>";
+								row +="<td>"+res[i].pengarang+"</td>";
+								row +="<td>"+res[i].penerbit+"</td>";
+								row +="<td>"+res[i].sinopsis+"</td>";
+								row +="<td>"+res[i].gambar+"</td>";
+								row +="<td><button data-daftarbuku='"+daftarbuku+"' onclick='$(this).deleteRow()'>Delete</button></td>";
+								row +="</tr>";
+								
+								no++
+							}
+							
+							$('#dispayData').html(row)
+						}
+					});
+				}
+				
+				$(this).loadData();
+				
+				$.fn.deleteRow = function(){
+					modeAction='delete';
+					let data = $(this).data('daftarbuku');
+					let _this = $(this).parents("tr");
+					$.ajax({
+						url:'api/member/proses.php',
+						dataType:'json',
+						type:'POST',
+						data:{idbuku:data.idbuku,mode:modeAction},
+						success:function(res){
+                   			 Swal.fire(
+                        		'Dihapus!',
+                        		'Data Berhasil Dihapus!',
+                        		'success'
+                   			 )
+               			 }
+					});
+					_this.fadeOut(400,function() {
+						Swal.fire(
+                        		'Dihapus!',
+                        		'Data Berhasil Dihapus!',
+                        		'success'
+                   			 ),
+					_this.remove();
+					});
+				}
+
+				$.fn.lihatDetail=function(){
+					let data = $(this).data('daftarbuku');
+					$('#tid').val(data.idbuku);
+					$('#tjudul').val(data.judul);
+					$('#tpengarang').val(data.pengarang);
+					$('#tpenerbit').val(data.penerbit);
+					$('#tsinopsis').val(data.sinopsis);
+					$('#tgambar').val(data.gambar);
+					$(".table tr").removeClass("selected");
+					$(this).addClass("selected");
+					
+					$('#exampleModal').modal('toggle')
+				}
+
+				
+
+				$.fn.saveData= function(){
+					let parameter={
+						idbuku:$('#tid').val(),
+						judul:$('#tjudul').val(),
+						pengarang:$('#tpengarang').val(),
+						penerbit:$('#tpenerbit').val(),
+						sinopsis:$('#tsinopsis').val(),
+						gambar:$('#tgambar').val(),
+						mode:modeAction
+					}
+
+					$.ajax({
+						url:'api/member/proses.php',
+						data:parameter,
+						type:'POST',
+						dataType:'json',
+						beforeSend:function(){
+
+						},success:function(res){
+							$('#exampleModal').modal('toggle')
+
+							Swal.fire({
+								title: 'Succsess',
+								text: res.messages,
+								icon: 'success',
+								confirmButtonText: 'Ok'
+							});
+							
+							modeAction='get';
+							$(this).loadData();
+						}
+					});
+				}
+
+				$.fn.ClearForm= function(){
+					$('#tid').val('')
+					$('#tjudul').val('')
+					$('#tpengarang').val('')
+					$('#tpenerbit').val('')
+					$('#tsinopsis').val('')
+					$('#tgambar').val('')
+					
+				}
+
+				
+				$('#loadData, #btn_reload').click(function(){
+					modeAction='get';
+					$(this).loadData();
+				});
+				
+				$('#btnProses').click(function(){
+					let data = $('#tid').val();
+					
+					if(data !='')
+						modeAction='update';
+					else
+						modeAction='add';
+
+					$(this).saveData();
+				});
+
+				$('#btn_add_new').click(function(){
+					$(this).ClearForm();
+					$('#exampleModal').modal('toggle')
+				});
+
+				$('#removeData').click(function(){
+					modeAction='delete';
+					$('#dispayData').html('');
+				});
+
+				$('#btnCancel').click(function(){
+					$(".table tr").removeClass("selected");
+					$( ":input" ).val('');
+				});
+
+			});
+		</script>
+	</body>
+</html>
